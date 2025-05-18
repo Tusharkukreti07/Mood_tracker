@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mood Tracker</title>
+<<<<<<< Updated upstream
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Shared Professional UI CSS -->
@@ -11,6 +12,12 @@
     <link rel="stylesheet" href="styles/shared-components.css">
     <link rel="stylesheet" href="styles/shared-responsive.css">
     <!-- Original CSS files -->
+=======
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Base CSS files -->
+>>>>>>> Stashed changes
     <link rel="stylesheet" href="styles/mood-tracker.css">
     <link rel="stylesheet" href="styles/mood-tracker-components.css">
     <link rel="stylesheet" href="styles/mood-tracker-cards.css">
@@ -24,6 +31,7 @@
     <link rel="stylesheet" href="styles/mood-tracker-responsive-enhanced.css">
 </head>
 <body>
+<<<<<<< Updated upstream
     <!-- Loading overlay -->
     <div class="loading-overlay active">
         <div class="loading-spinner"></div>
@@ -53,10 +61,29 @@
                     <h1 class="card-title">Hello, Lisa!</h1>
                     <p class="card-subtitle">How are you feeling today?</p>
                 </div>
+=======
+    <!-- Dark mode toggle -->
+    <button class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+
+    <div class="container">
+        <div class="header">
+            <div class="left-section">
+                <div class="logo">
+                    <div class="logo-icon">M</div>
+                    <span>Mood tracker</span>
+                </div>
+            </div>
+            <div class="right-section">
+                <button class="calendar-btn" onclick="window.location.href='calendar-view.html'">
+                    <span class="calendar-icon">📅</span>
+                    <span class="calendar-text">Calendar</span>
+                </button>
+>>>>>>> Stashed changes
                 <div class="user">
                     <div class="avatar">
                         👤
                     </div>
+<<<<<<< Updated upstream
                 </div>
             </div>
 
@@ -97,10 +124,14 @@
                 </div>
                 <div class="emoji">
                     <div>😄</div>
+=======
+                    <span>Lisa</span>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
 
+<<<<<<< Updated upstream
         <div class="grid grid-2 mt-xl">
             <div class="card animate-fade-in-left">
                 <div class="card-header">
@@ -161,10 +192,99 @@
                             <div class="badge badge-primary">#Optimistic</div>
                         </div>
                     </div>
+=======
+        <div class="welcome">
+            <h1>Hello, Lisa!</h1>
+            <p>How are you feeling today?</p>
+            <small>Wednesday, April 16th, 2023</small>
+        </div>
+
+        <div class="mood-selector">
+            <div class="mood-option">
+                <div class="mood-emoji">😔</div>
+                <div class="mood-name">Sad</div>
+            </div>
+            <div class="mood-option">
+                <div class="mood-emoji">😊</div>
+                <div class="mood-name">Happy</div>
+            </div>
+            <div class="mood-option">
+                <div class="mood-emoji">😐</div>
+                <div class="mood-name">Neutral</div>
+            </div>
+            <div class="mood-option selected">
+                <div class="mood-emoji">😄</div>
+                <div class="mood-name">Very Happy</div>
+            </div>
+            <div class="mood-option">
+                <div class="mood-emoji">😌</div>
+                <div class="mood-name">Calm</div>
+            </div>
+            <!-- Custom mood button will be added by JavaScript -->
+        </div>
+
+        <div class="mood-card">
+            <div class="mood-content">
+                <div class="mood-label">I'm feeling</div>
+                <div class="mood-value">Very Happy</div>
+
+                <div class="mood-quote">
+                    <p>"When your heart is full, share your light with the world."</p>
+                </div>
+            </div>
+            <div class="emoji">
+                <div>😄</div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-card">
+                <div class="stats-header">
+                    <div class="stats-title">
+                        <div class="stats-icon">📊</div>
+                        <span>Average Mood</span>
+                    </div>
+                    <small style="color: var(--text-light); font-size: 12px;">Last 7 trend avg.</small>
+                </div>
+
+                <div class="stats-icon neutral" style="width: 32px; height: 32px;">😐</div>
+                <div class="stats-value">Neutral</div>
+                <div class="stats-subtitle">Stable in the previous 2 week avg.</div>
+            </div>
+
+            <div class="stats-card sleep">
+                <div class="stats-header">
+                    <div class="stats-title">
+                        <div class="stats-icon" style="background-color: rgba(255,255,255,0.2);">💤</div>
+                        <span>Average Sleep</span>
+                    </div>
+                    <small style="color: #ffffff; opacity: 0.8; font-size: 12px;">Last 7 trend avg.</small>
+                </div>
+
+                <div class="stats-value">5-6 Hours</div>
+                <div class="stats-subtitle">Variation from the previous 1 hour avg.</div>
+            </div>
+        </div>
+
+        <div class="reflection">
+            <div class="reflection-title">
+                <div class="stats-icon">✨</div>
+                <span>Reflection of the day</span>
+                <!-- Add notes button will be added by JavaScript -->
+            </div>
+
+            <div class="reflection-content">
+                Woke up early and finally tackled a big project!
+
+                <div class="tags">
+                    <div class="tag">#Grateful</div>
+                    <div class="tag">#Optimistic</div>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
 
+<<<<<<< Updated upstream
         <div class="card mt-xl animate-fade-in-up">
             <div class="card-header">
                 <div>
@@ -246,11 +366,86 @@
                         </div>
                         <div class="day-label">Wed<br>08</div>
                     </div>
+=======
+        <div class="trends">
+            <div class="trends-header">Mood and sleep trends</div>
+
+            <div class="chart">
+                <div class="bar-container">
+                    <div class="bar neutral-mood" style="height: 80px;">
+                        <div class="emoji-icon">😐</div>
+                    </div>
+                    <div class="day-label">Mon<br>30</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar happy" style="height: 130px;">
+                        <div class="emoji-icon">😊</div>
+                    </div>
+                    <div class="day-label">Tue<br>31</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar sad" style="height: 60px;">
+                        <div class="emoji-icon">😔</div>
+                    </div>
+                    <div class="day-label">Wed<br>01</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar happy" style="height: 120px;">
+                        <div class="emoji-icon">😊</div>
+                    </div>
+                    <div class="day-label">Thu<br>02</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar calm" style="height: 90px;">
+                        <div class="emoji-icon">😌</div>
+                    </div>
+                    <div class="day-label">Fri<br>03</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar happy" style="height: 150px;">
+                        <div class="emoji-icon">😊</div>
+                    </div>
+                    <div class="day-label">Sat<br>04</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar happy" style="height: 140px;">
+                        <div class="emoji-icon">😊</div>
+                    </div>
+                    <div class="day-label">Sun<br>05</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar sad" style="height: 50px;">
+                        <div class="emoji-icon">😔</div>
+                    </div>
+                    <div class="day-label">Mon<br>06</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar neutral-mood" style="height: 100px;">
+                        <div class="emoji-icon">😐</div>
+                    </div>
+                    <div class="day-label">Tue<br>07</div>
+                </div>
+
+                <div class="bar-container">
+                    <div class="bar happy" style="height: 130px;">
+                        <div class="emoji-icon">😊</div>
+                    </div>
+                    <div class="day-label">Wed<br>08</div>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
 
         <!-- New feature: Mood History Timeline -->
+<<<<<<< Updated upstream
         <div class="card mt-xl animate-fade-in-up">
             <div class="card-header">
                 <div>
@@ -301,11 +496,34 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button class="btn btn-primary" onclick="saveNotes()">Save Notes</button>
+=======
+        <div class="mood-history">
+            <div class="mood-history-header">Recent Mood History</div>
+            <div class="timeline-container">
+                <!-- Timeline items will be added by JavaScript -->
+                <p class="no-data">No mood entries yet. Start tracking your mood!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-btn">+</div>
+
+    <!-- Notes Modal -->
+    <div class="notes-modal">
+        <div class="notes-content">
+            <button class="close-modal" onclick="closeNotesModal()">&times;</button>
+            <div class="notes-date">April 16, 2023</div>
+            <textarea class="notes-textarea" placeholder="Write your reflection for today..."></textarea>
+            <div class="notes-actions">
+                <button class="notes-btn notes-cancel" onclick="closeNotesModal()">Cancel</button>
+                <button class="notes-btn notes-save" onclick="saveNotes()">Save Notes</button>
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
 
     <!-- Custom Mood Modal -->
+<<<<<<< Updated upstream
     <div class="modal custom-mood-modal" id="custom-mood-modal">
         <div class="modal-content">
             <button class="modal-close" data-close-modal>&times;</button>
@@ -320,6 +538,20 @@
                 <div class="input-group">
                     <label class="input-label">Select Emoji</label>
                     <div class="grid grid-4 gap-md">
+=======
+    <div class="custom-mood-modal">
+        <div class="custom-mood-content">
+            <button class="close-modal" onclick="closeCustomMoodModal()">&times;</button>
+            <div class="custom-mood-title">Create Custom Mood</div>
+            <div class="custom-mood-form">
+                <div class="form-group">
+                    <label for="custom-mood-name">Mood Name</label>
+                    <input type="text" id="custom-mood-name" placeholder="e.g., Excited, Anxious, etc.">
+                </div>
+                <div class="form-group">
+                    <label>Select Emoji</label>
+                    <div class="emoji-picker">
+>>>>>>> Stashed changes
                         <div class="emoji-option">😀</div>
                         <div class="emoji-option">😍</div>
                         <div class="emoji-option">🤩</div>
@@ -330,6 +562,7 @@
                         <div class="emoji-option">😬</div>
                         <div class="emoji-option">😰</div>
                         <div class="emoji-option">😭</div>
+<<<<<<< Updated upstream
                         <div class="emoji-option">🥰</div>
                         <div class="emoji-option">😇</div>
                     </div>
@@ -342,10 +575,23 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button class="btn btn-primary" onclick="saveCustomMood()">Save Mood</button>
+=======
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="custom-mood-color">Mood Color</label>
+                    <input type="color" id="custom-mood-color" value="#6366f1">
+                </div>
+                <div class="notes-actions">
+                    <button class="notes-btn notes-cancel" onclick="closeCustomMoodModal()">Cancel</button>
+                    <button class="notes-btn notes-save" onclick="saveCustomMood()">Save Mood</button>
+                </div>
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
 
+<<<<<<< Updated upstream
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -389,10 +635,14 @@
 
     <!-- JavaScript files -->
     <script src="js/shared.js"></script>
+=======
+    <!-- JavaScript files -->
+>>>>>>> Stashed changes
     <script src="js/mood-tracker.js"></script>
     <script src="js/mood-tracker-enhanced.js"></script>
 
     <script>
+<<<<<<< Updated upstream
         // Initialize page-specific functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Update current date
@@ -406,6 +656,10 @@
             });
 
             // Initialize emoji picker
+=======
+        // Initialize emoji picker
+        document.addEventListener('DOMContentLoaded', function() {
+>>>>>>> Stashed changes
             const emojiOptions = document.querySelectorAll('.emoji-option');
             emojiOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -413,6 +667,7 @@
                     this.classList.add('selected');
                 });
             });
+<<<<<<< Updated upstream
 
             // Connect add notes button
             document.getElementById('add-notes-btn').addEventListener('click', function() {
@@ -423,6 +678,8 @@
             document.getElementById('view-all-history').addEventListener('click', function() {
                 showNotification('Viewing all mood history', 'info');
             });
+=======
+>>>>>>> Stashed changes
         });
     </script>
 </body>
