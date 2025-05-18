@@ -1,0 +1,47 @@
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .mood-card {
+        flex-direction: column;
+    }
+
+    .emoji {
+        margin: 20px auto 0;
+    }
+
+    .stats-section {
+        flex-direction: column;
+    }
+
+    .stats-card {
+        margin-bottom: 16px;
+    }
+
+    .header {
+        padding-bottom: 16px;
+    }
+
+    .right-section {
+        gap: 12px;
+    }
+
+    .calendar-btn {
+        padding: 8px 10px;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        justify-content: center;
+    }
+
+    .calendar-text {
+        display: none;
+    }
+
+    .calendar-icon {
+        margin: 0;
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker Calendar</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Shared Professional UI CSS -->
+    <link rel="stylesheet" href="styles/shared-layout.css">
+    <link rel="stylesheet" href="styles/shared-components.css">
+    <link rel="stylesheet" href="styles/shared-responsive.css">
+    <!-- Original CSS files -->
+    <link rel="stylesheet" href="styles/calendar-view.css">
+    <link rel="stylesheet" href="styles/calendar-view-components.css">
+    <link rel="stylesheet" href="styles/calendar-view-stats.css">
+    <!-- Enhanced CSS files -->
+    <link rel="stylesheet" href="styles/calendar-view-enhanced.css">
+    <link rel="stylesheet" href="styles/calendar-view-components-enhanced.css">
+    <link rel="stylesheet" href="styles/calendar-view-stats-enhanced.css">
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div class="loading-overlay active">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">Mood Tracker</div>
+            </a>
+            <div class="navbar-menu">
+                <a href="mood-tracker.html" class="nav-link">Dashboard</a>
+                <a href="calendar-view.html" class="nav-link active">Calendar</a>
+                <a href="#" class="nav-link">Statistics</a>
+                <a href="#" class="nav-link">Settings</a>
+                <button class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-container">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h1 class="card-title">Mood Calendar</h1>
+                    <p class="card-subtitle">Track your emotions and discover patterns in your mood</p>
+                </div>
+                <button class="btn btn-primary" id="share-btn" title="Share Your Mood Data">
+                    <i class="fas fa-share-alt mr-sm"></i> Share
+                </button>
+            </div>
+
+            <div class="card-content">
+                <div class="mood-selection grid-5 mt-lg">
+                    <button class="mood-btn" data-mood="great">😁</button>
+                    <button class="mood-btn" data-mood="good">😊</button>
+                    <button class="mood-btn" data-mood="neutral">😐</button>
+                    <button class="mood-btn" data-mood="bad">😔</button>
+                    <button class="mood-btn" data-mood="awful">😢</button>
+                </div>
+
+                <div class="calendar-container mt-xl">
+                    <div class="calendar-header">
+                        <button class="nav-btn prev-month">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="month-year">May 2025</div>
+                        <button class="nav-btn next-month">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Calendar days will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="mood-legend mt-lg">
+                    <div class="legend-item">
+                        <div class="legend-color" data-mood="great"></div>
+                        <div>Great</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" data-mood="good"></div>
+                        <div>Good</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" data-mood="neutral"></div>
+                        <div>Neutral</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" data-mood="bad"></div>
+                        <div>Bad</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" data-mood="awful"></div>
+                        <div>Awful</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-2 mt-xl">
+            <!-- Monthly Mood Summary Visualization -->
+            <div class="card animate-fade-in-left">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Monthly Mood Summary</h2>
+                        <p class="card-subtitle">Visual breakdown of your moods</p>
+                    </div>
+                    <div class="badge badge-primary">
+                        <i class="fas fa-chart-pie mr-sm"></i> May 2025
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="chart-container">
+                        <canvas id="mood-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card animate-fade-in-right">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Your Mood Stats</h2>
+                        <p class="card-subtitle">Key metrics for this month</p>
+                    </div>
+                    <button class="btn btn-secondary" id="export-stats">
+                        <i class="fas fa-download mr-sm"></i> Export
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="stat-month-mood">Good</div>
+                            <div class="stat-label">Most Common Mood</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stat-streak">5</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stat-percent-positive">65%</div>
+                            <div class="stat-label">Positive Days</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notes Modal -->
+    <div class="modal notes-modal" id="notes-modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal>&times;</button>
+            <div class="modal-header">
+                <h3 class="modal-title" id="notes-date">May 18, 2025</h3>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="notes-textarea">Your notes for this day</label>
+                    <textarea class="textarea" id="notes-textarea" placeholder="Write your notes for this day..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close-modal>Cancel</button>
+                <button class="btn btn-primary" onclick="saveNotes()">Save Notes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal>&times;</button>
+            <div class="modal-header">
+                <h3 class="modal-title">Share Your Mood Data</h3>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label">Share Options</label>
+                    <div class="grid grid-2 gap-md">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-file-export mr-sm"></i> Export as CSV
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-image mr-sm"></i> Export as Image
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-envelope mr-sm"></i> Email Report
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-print mr-sm"></i> Print Report
+                        </button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Share on Social Media</label>
+                    <div class="flex gap-md">
+                        <button class="btn btn-icon" style="background-color: #1DA1F2; color: white;">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="btn btn-icon" style="background-color: #4267B2; color: white;">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="btn btn-icon" style="background-color: #0077B5; color: white;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                        <button class="btn btn-icon" style="background-color: #25D366; color: white;">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="js/calendar-view.js"></script>
+    <script src="js/calendar-stats.js"></script>
+    <script src="js/calendar-view-enhanced.js"></script>
+
+    <script>
+        // Initialize enhanced features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up dark mode toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', toggleDarkMode);
+
+            // Check for saved dark mode preference
+            checkDarkModePreference();
+
+            // Load saved notes
+            loadNotes();
+
+            // Update the renderCalendar function
+            updateRenderCalendar();
+
+            // Initialize the calendar with enhanced features
+            renderCalendar();
+
+            // Set up modal close button
+            document.querySelector('.close-modal').addEventListener('click', closeNotesModal);
+
+            // Close modal when clicking outside
+            document.querySelector('.notes-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeNotesModal();
+                }
+            });
+
+            // Add tooltip to calendar days
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = 'Double-click to add notes';
+            document.body.appendChild(tooltip);
+
+            // Window resize event for chart
+            window.addEventListener('resize', createMoodSummaryChart);
+        });
+    </script>
+</body>
+</html>

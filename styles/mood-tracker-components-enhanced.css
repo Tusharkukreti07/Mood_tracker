@@ -1,0 +1,266 @@
+/* Enhanced components for mood tracker */
+
+/* Enhanced welcome section */
+.welcome {
+    text-align: center;
+    margin: 36px 0; /* Increased spacing */
+    animation: fadeIn 1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome h1 {
+    color: var(--text-dark);
+    margin-bottom: 12px; /* Increased spacing */
+    font-size: var(--font-3xl); /* Increased font size */
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+    transition: color 0.3s ease;
+}
+
+.welcome p {
+    color: var(--text-medium);
+    font-size: var(--font-lg); /* Increased font size */
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+.welcome small {
+    color: var(--text-light);
+    font-size: var(--font-sm); /* Increased font size */
+    transition: color 0.3s ease;
+}
+
+/* Enhanced mood selector */
+.mood-selector {
+    display: flex;
+    justify-content: center;
+    gap: 18px; /* Increased spacing */
+    margin: 32px 0; /* Increased spacing */
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.6s;
+    position: relative;
+    z-index: 1;
+}
+
+.mood-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Increased spacing */
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0.6;
+    position: relative;
+}
+
+.mood-option:hover {
+    transform: translateY(-8px);
+    opacity: 1;
+}
+
+.mood-option.selected {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.mood-option.selected::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.mood-emoji {
+    width: 62px; /* Increased size by ~25% */
+    height: 62px; /* Increased size by ~25% */
+    border-radius: var(--border-radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px; /* Increased font size */
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mood-emoji::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    transform: rotate(30deg);
+}
+
+.mood-option:hover .mood-emoji {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
+}
+
+.mood-option:hover .mood-emoji::after {
+    opacity: 1;
+    animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: rotate(30deg) translateY(0);
+    }
+    100% {
+        transform: rotate(30deg) translateY(100%);
+    }
+}
+
+.mood-name {
+    font-size: var(--font-sm); /* Increased font size */
+    font-weight: 600;
+    color: var(--text-medium);
+    transition: color 0.3s ease;
+}
+
+.mood-option:hover .mood-name {
+    color: var(--primary);
+}
+
+/* Enhanced mood option gradients */
+.mood-option:nth-child(1) .mood-emoji {
+    background: linear-gradient(135deg, var(--sad), #f87171);
+}
+
+.mood-option:nth-child(2) .mood-emoji {
+    background: linear-gradient(135deg, var(--accent), #fbbf24);
+}
+
+.mood-option:nth-child(3) .mood-emoji {
+    background: linear-gradient(135deg, var(--neutral), #93c5fd);
+}
+
+.mood-option:nth-child(4) .mood-emoji {
+    background: linear-gradient(135deg, var(--happy), #34d399);
+}
+
+.mood-option:nth-child(5) .mood-emoji {
+    background: linear-gradient(135deg, var(--calm), #c4b5fd);
+}
+
+/* Enhanced user avatar */
+.user {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Increased spacing */
+}
+
+.avatar {
+    width: 45px; /* Increased size by ~25% */
+    height: 45px; /* Increased size by ~25% */
+    border-radius: var(--border-radius-full);
+    background: linear-gradient(135deg, #cbd5e1, #e2e8f0);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #f1f5f9;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    font-size: var(--font-lg); /* Increased font size */
+}
+
+.avatar:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.user span {
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: var(--text-medium);
+    transition: color 0.3s ease;
+}
+
+/* Enhanced calendar button */
+.calendar-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Increased spacing */
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 12px 20px; /* Increased padding */
+    font-size: var(--font-sm); /* Increased font size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    transform: rotate(30deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.calendar-btn:hover::after {
+    opacity: 1;
+    animation: shine 1.5s infinite;
+}
+
+.calendar-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+.calendar-btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Enhanced calendar button animation */
+@keyframes calendarPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.calendar-icon {
+    font-size: var(--font-md); /* Increased font size */
+    margin-right: 4px;
+    animation: calendarPulse 2s infinite;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-text {
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}

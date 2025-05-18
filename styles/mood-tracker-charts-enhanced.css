@@ -1,0 +1,330 @@
+/* Enhanced charts and new features for mood tracker */
+
+/* Enhanced reflection section */
+.reflection {
+    margin-bottom: 32px; /* Increased spacing */
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.2s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    position: relative;
+    z-index: 1;
+}
+
+.reflection-title {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Increased spacing */
+    margin-bottom: 16px; /* Increased spacing */
+}
+
+.reflection-title span {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: var(--font-md); /* Increased font size */
+    transition: color 0.3s ease;
+}
+
+.reflection-content {
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 20px; /* Increased padding */
+    font-size: var(--font-md); /* Increased font size */
+    color: var(--text-medium);
+    box-shadow: var(--shadow-md);
+    border-left: 5px solid var(--primary); /* Increased thickness */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    line-height: 1.6;
+}
+
+.dark-mode .reflection-content {
+    background-color: var(--bg-light);
+}
+
+.reflection-content:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    transform: translateX(5px);
+}
+
+/* Enhanced tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Increased spacing */
+    margin-top: 16px; /* Increased spacing */
+}
+
+.tag {
+    background-color: rgba(99, 102, 241, 0.1);
+    border-radius: 20px;
+    padding: 6px 14px; /* Increased padding */
+    font-size: var(--font-sm); /* Increased font size */
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tag:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(99, 102, 241, 0.3);
+}
+
+/* Enhanced trends section */
+.trends {
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 25px; /* Increased padding */
+    margin-top: 32px; /* Increased spacing */
+    box-shadow: var(--shadow-lg);
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.4s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode .trends {
+    background-color: var(--bg-light);
+}
+
+.trends-header {
+    font-size: var(--font-xl); /* Increased font size */
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 25px; /* Increased spacing */
+    padding-bottom: 12px; /* Increased padding */
+    border-bottom: 2px solid rgba(99, 102, 241, 0.2); /* Enhanced border */
+    transition: color 0.3s ease;
+}
+
+/* Enhanced chart */
+.chart {
+    height: 250px; /* Increased height */
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 20px; /* Added spacing */
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35px; /* Increased width */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bar-container:hover {
+    transform: translateY(-8px);
+}
+
+.bar {
+    width: 35px; /* Increased width */
+    border-radius: 10px; /* Increased radius */
+    margin-bottom: 12px; /* Increased spacing */
+    position: relative;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bar:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+    transform: scaleX(1.05);
+}
+
+.emoji-icon {
+    position: absolute;
+    top: -18px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px; /* Increased size */
+    height: 30px; /* Increased size */
+    border-radius: var(--border-radius-full);
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+    font-size: var(--font-md); /* Increased font size */
+}
+
+.bar:hover .emoji-icon {
+    transform: translateX(-50%) scale(1.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: bounce 1s infinite alternate;
+}
+
+.day-label {
+    font-size: var(--font-sm); /* Increased font size */
+    color: var(--text-light);
+    text-align: center;
+    font-weight: 500;
+    margin-top: 8px; /* Increased spacing */
+    transition: all 0.3s ease;
+}
+
+.bar-container:hover .day-label {
+    color: var(--primary);
+    font-weight: 600;
+    transform: scale(1.1);
+}
+
+/* Enhanced bar colors with gradients */
+.happy {
+    background: linear-gradient(to top, var(--happy), #34d399);
+}
+
+.sad {
+    background: linear-gradient(to top, var(--sad), #f87171);
+}
+
+.neutral-mood {
+    background: linear-gradient(to top, var(--neutral), #93c5fd);
+}
+
+.calm {
+    background: linear-gradient(to top, var(--calm), #c4b5fd);
+}
+
+/* Enhanced floating button */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px; /* Increased size */
+    height: 65px; /* Increased size */
+    border-radius: var(--border-radius-full);
+    background: var(--gradient-primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px; /* Increased font size */
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 1s;
+}
+
+.floating-btn:hover {
+    transform: translateY(-8px) rotate(45deg);
+    box-shadow: 0 15px 30px rgba(79, 70, 229, 0.5);
+}
+
+/* New feature: Mood history timeline */
+.mood-history {
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    margin-top: 32px;
+    box-shadow: var(--shadow-lg);
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode .mood-history {
+    background-color: var(--bg-light);
+}
+
+.mood-history-header {
+    font-size: var(--font-xl);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.2);
+    transition: color 0.3s ease;
+}
+
+.timeline-container {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-light), var(--primary-dark));
+    border-radius: 5px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.3);
+}
+
+.timeline-content {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-md);
+    padding: 15px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.timeline-date {
+    font-size: var(--font-sm);
+    color: var(--text-light);
+    margin-bottom: 5px;
+}
+
+.timeline-mood {
+    font-size: var(--font-md);
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.timeline-emoji {
+    font-size: var(--font-lg);
+}

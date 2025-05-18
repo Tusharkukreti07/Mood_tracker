@@ -1,0 +1,378 @@
+/* Enhanced responsive styles for mood tracker */
+
+/* Notes modal */
+.notes-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.notes-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.notes-content {
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+}
+
+.dark-mode .notes-content {
+    background: var(--bg-light);
+}
+
+.notes-modal.active .notes-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notes-date {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary);
+    text-align: center;
+}
+
+.notes-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border-radius: var(--border-radius-md);
+    border: 2px solid var(--primary-light);
+    background: var(--bg-white);
+    color: var(--text-dark);
+    font-family: inherit;
+    font-size: var(--font-md);
+    resize: vertical;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .notes-textarea {
+    background: var(--bg-light);
+    border-color: var(--primary-dark);
+    color: var(--text-medium);
+}
+
+.notes-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.notes-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.notes-btn {
+    padding: 10px 20px;
+    border-radius: var(--border-radius-md);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: var(--font-sm);
+}
+
+.notes-save {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.notes-save:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.notes-cancel {
+    background: transparent;
+    color: var(--text-medium);
+    border: 1px solid var(--text-light);
+}
+
+.notes-cancel:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: var(--font-xl);
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
+
+/* Custom mood modal */
+.custom-mood-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.custom-mood-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-mood-content {
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+}
+
+.dark-mode .custom-mood-content {
+    background: var(--bg-light);
+}
+
+.custom-mood-modal.active .custom-mood-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.custom-mood-title {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--primary);
+    text-align: center;
+}
+
+.custom-mood-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: var(--font-sm);
+    font-weight: 600;
+    color: var(--text-medium);
+}
+
+.form-group input, .form-group select {
+    padding: 10px 15px;
+    border-radius: var(--border-radius-md);
+    border: 2px solid var(--primary-light);
+    background: var(--bg-white);
+    color: var(--text-dark);
+    font-family: inherit;
+    font-size: var(--font-md);
+    transition: all 0.3s ease;
+}
+
+.dark-mode .form-group input, .dark-mode .form-group select {
+    background: var(--bg-light);
+    border-color: var(--primary-dark);
+    color: var(--text-medium);
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.emoji-picker {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.emoji-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--bg-light);
+}
+
+.emoji-option:hover, .emoji-option.selected {
+    transform: scale(1.2);
+    background: var(--primary-light);
+    color: white;
+}
+
+/* Enhanced responsive adjustments */
+@media (max-width: 768px) {
+    :root {
+        --font-xs: 0.75rem;   /* 12px */
+        --font-sm: 0.875rem;  /* 14px */
+        --font-md: 1rem;      /* 16px */
+        --font-lg: 1.125rem;  /* 18px */
+        --font-xl: 1.25rem;   /* 20px */
+        --font-2xl: 1.5rem;   /* 24px */
+        --font-3xl: 1.875rem; /* 30px */
+    }
+    
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .right-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .mood-card {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .emoji {
+        margin: 25px auto 0;
+        width: 140px;
+        height: 140px;
+    }
+    
+    .emoji div {
+        font-size: 70px;
+    }
+    
+    .stats-section {
+        flex-direction: column;
+    }
+    
+    .stats-card {
+        margin-bottom: 20px;
+    }
+    
+    .mood-selector {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .mood-option {
+        margin-bottom: 10px;
+    }
+    
+    .chart {
+        overflow-x: auto;
+        padding-bottom: 15px;
+        justify-content: flex-start;
+    }
+    
+    .bar-container {
+        min-width: 40px;
+        margin-right: 10px;
+    }
+    
+    .floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    .timeline-container {
+        padding-left: 25px;
+    }
+    
+    .timeline-dot {
+        left: -25px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .welcome h1 {
+        font-size: var(--font-2xl);
+    }
+    
+    .mood-emoji {
+        width: 50px;
+        height: 50px;
+        font-size: 28px;
+    }
+    
+    .emoji {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .emoji div {
+        font-size: 60px;
+    }
+    
+    .calendar-btn {
+        padding: 8px 12px;
+    }
+    
+    .calendar-text {
+        display: none;
+    }
+    
+    .calendar-icon {
+        margin: 0;
+    }
+}

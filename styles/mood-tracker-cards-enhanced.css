@@ -1,0 +1,292 @@
+/* Enhanced cards for mood tracker */
+
+/* Enhanced mood card */
+.mood-card {
+    display: flex;
+    background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+    border-radius: var(--border-radius-lg);
+    padding: 32px; /* Increased padding */
+    margin-bottom: 32px; /* Increased spacing */
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.6s ease-out;
+    z-index: 1;
+}
+
+.dark-mode .mood-card {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.mood-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.mood-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
+    transform: rotate(30deg);
+    transition: all 0.8s ease;
+    z-index: 1;
+    opacity: 0;
+}
+
+.mood-card:hover::after {
+    opacity: 1;
+    animation: shine 3s infinite;
+}
+
+.mood-content {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.mood-label {
+    font-size: var(--font-md); /* Increased font size */
+    color: var(--text-medium);
+    margin-bottom: 10px; /* Increased spacing */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.mood-value {
+    font-size: var(--font-2xl); /* Increased font size */
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 22px; /* Increased spacing */
+    background: linear-gradient(135deg, var(--happy), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced mood quote */
+.mood-quote {
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-md);
+    padding: 20px; /* Increased padding */
+    position: relative;
+    margin-top: 22px; /* Increased spacing */
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dark-mode .mood-quote {
+    background-color: rgba(31, 41, 55, 0.7);
+}
+
+.mood-quote:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.mood-quote::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 40px; /* Increased font size */
+    color: var(--primary);
+    font-weight: bold;
+    opacity: 0.6;
+    transition: color 0.3s ease;
+}
+
+.mood-quote p {
+    padding-left: 22px; /* Increased padding */
+    font-size: var(--font-md); /* Increased font size */
+    color: var(--text-medium);
+    font-style: italic;
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
+
+/* Enhanced emoji display */
+.emoji {
+    width: 160px; /* Increased size by ~25% */
+    height: 160px; /* Increased size by ~25% */
+    background: linear-gradient(135deg, var(--accent), #fcd34d);
+    border-radius: var(--border-radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px; /* Increased spacing */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 2;
+    animation: pulse 3s infinite alternate;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+}
+
+.emoji:hover {
+    transform: scale(1.12) rotate(8deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.emoji div {
+    font-size: 85px; /* Increased font size */
+    animation: bounce 2s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+}
+
+/* Enhanced stats section */
+.stats-section {
+    display: flex;
+    gap: 25px; /* Increased spacing */
+    margin-bottom: 32px; /* Increased spacing */
+    animation: fadeInRight 0.8s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.stats-card {
+    flex: 1;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-lg);
+    padding: 22px; /* Increased padding */
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    position: relative;
+}
+
+.stats-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Increased thickness */
+    background: linear-gradient(90deg, var(--primary-light), var(--primary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease;
+}
+
+.stats-card:hover::after {
+    transform: scaleX(1);
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px; /* Increased spacing */
+}
+
+.stats-title {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Increased spacing */
+}
+
+.stats-title span {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: var(--font-md); /* Increased font size */
+    transition: color 0.3s ease;
+}
+
+.stats-icon {
+    width: 35px; /* Increased size */
+    height: 35px; /* Increased size */
+    border-radius: var(--border-radius-full);
+    background-color: rgba(99, 102, 241, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: var(--font-md); /* Increased font size */
+}
+
+.stats-card:hover .stats-icon {
+    transform: rotate(15deg) scale(1.2);
+    background-color: rgba(99, 102, 241, 0.2);
+}
+
+.stats-value {
+    font-size: var(--font-xl); /* Increased font size */
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 12px 0; /* Increased spacing */
+    transition: color 0.3s ease;
+}
+
+.stats-subtitle {
+    font-size: var(--font-sm); /* Increased font size */
+    color: var(--text-light);
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+/* Enhanced stats card variants */
+.neutral {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.2);
+}
+
+.dark-mode .neutral {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+}
+
+.sleep {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+}
+
+.sleep .stats-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.sleep .stats-value, .sleep .stats-title span, .sleep .stats-subtitle {
+    color: white;
+}

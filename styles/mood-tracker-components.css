@@ -1,0 +1,177 @@
+.welcome {
+    text-align: center;
+    margin: 32px 0;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.welcome h1 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.welcome p {
+    color: var(--text-medium);
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.welcome small {
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+/* Mood selector */
+.mood-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 24px 0;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+.mood-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    opacity: 0.5;
+}
+
+.mood-option:hover {
+    transform: translateY(-5px);
+    opacity: 1;
+}
+
+.mood-option.selected {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.mood-emoji {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-speed);
+}
+
+.mood-option:hover .mood-emoji {
+    box-shadow: var(--shadow-md);
+}
+
+.mood-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-medium);
+}
+
+.mood-option:nth-child(1) .mood-emoji {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+}
+
+.mood-option:nth-child(2) .mood-emoji {
+    background: linear-gradient(135deg, #fcd34d, #f59e0b);
+}
+
+.mood-option:nth-child(3) .mood-emoji {
+    background: linear-gradient(135deg, #93c5fd, #60a5fa);
+}
+
+.mood-option:nth-child(4) .mood-emoji {
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.mood-option:nth-child(5) .mood-emoji {
+    background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+}
+
+/* Mood card */
+.mood-card {
+    display: flex;
+    background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+    border-radius: var(--border-radius-md);
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-speed);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.mood-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.mood-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+    transform: rotate(30deg);
+    transition: all 0.8s ease;
+    z-index: 1;
+    opacity: 0;
+}
+
+.mood-card:hover::after {
+    opacity: 1;
+}
+
+.mood-content {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.mood-label {
+    font-size: 15px;
+    color: var(--text-medium);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.mood-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, var(--happy), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

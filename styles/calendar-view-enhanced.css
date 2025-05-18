@@ -1,0 +1,224 @@
+/* Enhanced styles for calendar view */
+
+/* Dark mode variables */
+:root {
+    /* Light mode (default) */
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --secondary: #a992f7;
+    --accent: #ffd166;
+    --bg: #f9f8ff;
+    --bg-card: #ffffff;
+    --text: #2d2b55;
+    --text-light: #6b7280;
+    --shadow: rgba(46, 43, 85, 0.1);
+    --shadow-strong: rgba(46, 43, 85, 0.2);
+    
+    --mood-great: #06d6a0;
+    --mood-good: #82c91e;
+    --mood-neutral: #ffd166;
+    --mood-bad: #f28482;
+    --mood-awful: #e63946;
+    
+    /* Enhanced gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    --gradient-header: linear-gradient(135deg, #6366f1, #4f46e5);
+    --gradient-card: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+}
+
+/* Dark mode class to be toggled */
+.dark-mode {
+    --primary: #818cf8;
+    --primary-light: #a5b4fc;
+    --primary-dark: #6366f1;
+    --secondary: #c4b5fd;
+    --accent: #fcd34d;
+    --bg: #1f2937;
+    --bg-card: #374151;
+    --text: #f3f4f6;
+    --text-light: #d1d5db;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-strong: rgba(0, 0, 0, 0.5);
+    
+    /* Mood colors slightly adjusted for dark mode */
+    --mood-great: #10b981;
+    --mood-good: #84cc16;
+    --mood-neutral: #facc15;
+    --mood-bad: #ef4444;
+    --mood-awful: #dc2626;
+    
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    --gradient-header: linear-gradient(135deg, #4f46e5, #3730a3);
+    --gradient-card: linear-gradient(to bottom right, rgba(55, 65, 81, 0.9), rgba(31, 41, 55, 0.8));
+}
+
+/* Enhanced body styles */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced header */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: var(--gradient-header);
+    box-shadow: 0 10px 25px var(--shadow);
+    width: 100%;
+    max-width: 800px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+}
+
+header p.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Dark mode toggle */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-3px) rotate(20deg);
+    box-shadow: 0 6px 15px var(--shadow-strong);
+}
+
+/* Share button */
+.share-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.share-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-strong);
+}
+
+/* Enhanced mood buttons */
+.mood-selection {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    animation: slideUp 0.8s ease;
+}
+
+.mood-btn {
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 75px; /* Increased by ~25% */
+    height: 75px; /* Increased by ~25% */
+    font-size: 2.5rem; /* Increased emoji size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 20px var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.mood-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Enhanced hover effects */
+.mood-btn:hover {
+    transform: translateY(-8px) scale(1.15);
+    box-shadow: 0 15px 30px var(--shadow-strong);
+}
+
+.mood-btn:hover::before {
+    opacity: 1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+.mood-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.mood-btn.selected {
+    transform: scale(1.2);
+    box-shadow: 0 12px 30px var(--shadow-strong);
+    animation: selectedPulse 2s infinite alternate;
+}
+
+@keyframes selectedPulse {
+    0% { transform: scale(1.15); }
+    100% { transform: scale(1.25); }
+}
+
+/* Enhanced mood button colors with gradients */
+.mood-btn[data-mood="great"] { background: linear-gradient(135deg, var(--mood-great), #34d399); }
+.mood-btn[data-mood="good"] { background: linear-gradient(135deg, var(--mood-good), #a3e635); }
+.mood-btn[data-mood="neutral"] { background: linear-gradient(135deg, var(--mood-neutral), #fbbf24); }
+.mood-btn[data-mood="bad"] { background: linear-gradient(135deg, var(--mood-bad), #fb7185); }
+.mood-btn[data-mood="awful"] { background: linear-gradient(135deg, var(--mood-awful), #f43f5e); }

@@ -1,0 +1,151 @@
+/* Calendar container */
+.calendar-container {
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+    animation: fadeIn 1s ease;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.month-year {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--primary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: var(--bg);
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.day-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.day-number {
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.day-emoji {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.day:hover .day-number {
+    opacity: 0;
+}
+
+.day:hover .day-emoji {
+    opacity: 1;
+    transform: scale(1);
+    animation: bounce 0.8s infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.3);
+    }
+}
+
+.day[data-mood="great"] { background-color: var(--mood-great); }
+.day[data-mood="good"] { background-color: var(--mood-good); }
+.day[data-mood="neutral"] { background-color: var(--mood-neutral); }
+.day[data-mood="bad"] { background-color: var(--mood-bad); }
+.day[data-mood="awful"] { background-color: var(--mood-awful); }
+.day[data-mood="none"] { background-color: #e9ecef; }
+
+.day.active {
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.day.empty {
+    visibility: hidden;
+}
+
+/* Mood legend */
+.mood-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.legend-color[data-mood="great"] { background-color: var(--mood-great); }
+.legend-color[data-mood="good"] { background-color: var(--mood-good); }
+.legend-color[data-mood="neutral"] { background-color: var(--mood-neutral); }
+.legend-color[data-mood="bad"] { background-color: var(--mood-bad); }
+.legend-color[data-mood="awful"] { background-color: var(--mood-awful); }
