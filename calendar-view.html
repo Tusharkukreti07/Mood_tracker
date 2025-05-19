@@ -33,7 +33,7 @@
                 <div class="logo-text">Mood Tracker</div>
             </a>
             <div class="navbar-menu">
-                <a href="mood-tracker.html" class="nav-link">Dashboard</a>
+                <a href="index.html" class="nav-link">Dashboard</a>
                 <a href="calendar-view.html" class="nav-link active">Calendar</a>
                 <a href="#" class="nav-link">Statistics</a>
                 <a href="#" class="nav-link">Settings</a>
@@ -229,48 +229,97 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Mood Tracker</h3>
+                    <p class="text-medium">Track your emotions and discover patterns in your mood to improve your mental well-being.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="index.html" class="footer-link">Dashboard</a>
+                        <a href="calendar-view.html" class="footer-link">Calendar</a>
+                        <a href="#" class="footer-link">Statistics</a>
+                        <a href="#" class="footer-link">Settings</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Resources</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 Mood Tracker. All rights reserved.
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- JavaScript files -->
+    <script src="js/shared.js"></script>
     <script src="js/calendar-view.js"></script>
     <script src="js/calendar-stats.js"></script>
+
     <script src="js/calendar-view-enhanced.js"></script>
+    <script src="js/mood-chart-enhanced.js"></script>
 
     <script>
-        // Initialize enhanced features
+        // Initialize page-specific functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Set up dark mode toggle
-            const themeToggle = document.querySelector('.theme-toggle');
-            themeToggle.addEventListener('click', toggleDarkMode);
-
-            // Check for saved dark mode preference
-            checkDarkModePreference();
-
-            // Load saved notes
-            loadNotes();
-
-            // Update the renderCalendar function
-            updateRenderCalendar();
-
-            // Initialize the calendar with enhanced features
-            renderCalendar();
-
-            // Set up modal close button
-            document.querySelector('.close-modal').addEventListener('click', closeNotesModal);
-
-            // Close modal when clicking outside
-            document.querySelector('.notes-modal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeNotesModal();
-                }
+            // Connect share button to modal
+            document.getElementById('share-btn').addEventListener('click', function() {
+                openModal(document.getElementById('share-modal'));
             });
 
-            // Add tooltip to calendar days
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = 'Double-click to add notes';
-            document.body.appendChild(tooltip);
+            // Connect export stats button
+            document.getElementById('export-stats').addEventListener('click', function() {
+                showNotification('Statistics exported successfully!', 'success');
+            });
+
+            // Initialize calendar day click for notes
+            document.addEventListener('calendarDayClick', function(e) {
+                const day = e.detail.day;
+                const date = e.detail.date;
+
+                // Update notes modal with date
+                document.getElementById('notes-date').textContent = date;
+
+                // Open notes modal
+                openModal(document.getElementById('notes-modal'));
+            });
+
+            // Initialize enhanced features
+            // Load saved notes
+            if (typeof loadNotes === 'function') {
+                loadNotes();
+            }
+
+            // Initialize the calendar with enhanced features
+            if (typeof renderCalendar === 'function') {
+                renderCalendar();
+            }
 
             // Window resize event for chart
-            window.addEventListener('resize', createMoodSummaryChart);
+            window.addEventListener('resize', function() {
+                if (typeof createMoodSummaryChart === 'function') {
+                    createMoodSummaryChart();
+                }
+            });
         });
     </script>
 </body>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Statistics - Mood Tracker</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Shared Professional UI CSS -->
+    <link rel="stylesheet" href="styles/shared-layout.css">
+    <link rel="stylesheet" href="styles/shared-components.css">
+    <link rel="stylesheet" href="styles/shared-responsive.css">
+    <!-- Statistics specific CSS -->
+    <link rel="stylesheet" href="styles/statistics.css">
+    <!-- Three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- OrbitControls for Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <!-- D3.js for additional visualizations -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Chart.js for comparison charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2canvas and jsPDF for export functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Enhanced statistics styles -->
+    <link rel="stylesheet" href="styles/statistics-enhanced.css">
+    <link rel="stylesheet" href="styles/statistics-2d-enhanced.css">
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div class="loading-overlay active">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">Mood Tracker</div>
+            </a>
+            <div class="navbar-menu">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="calendar-view.html" class="nav-link">Calendar</a>
+                <a href="statistics.html" class="nav-link active">Statistics</a>
+                <a href="#" class="nav-link">Settings</a>
+                <button class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-container">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h1 class="card-title">Mood Statistics</h1>
+                    <p class="card-subtitle">Visualize your mood and sleep patterns over time</p>
+                </div>
+                <div class="controls">
+                    <div class="badge badge-primary" id="current-date-range">
+                        <i class="fas fa-calendar-alt mr-sm"></i> <span>January 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visualization-controls mt-md">
+                <div class="control-group">
+                    <label class="control-label">Time Period:</label>
+                    <div class="button-group">
+                        <button class="btn btn-sm time-period-btn" data-period="week">Week</button>
+                        <button class="btn btn-sm time-period-btn active" data-period="month">Month</button>
+                        <button class="btn btn-sm time-period-btn" data-period="year">Year</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">View Mode:</label>
+                    <div class="button-group">
+                        <button class="btn btn-sm view-mode-btn active" data-view="3d">3D View</button>
+                        <button class="btn btn-sm view-mode-btn" data-view="2d">2D View</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Data:</label>
+                    <div class="button-group">
+                        <button class="btn btn-sm data-toggle-btn active" data-toggle="all">All Data</button>
+                        <button class="btn btn-sm data-toggle-btn" data-toggle="real">Real Only</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn btn-primary btn-sm export-btn" title="Export Visualization">
+                        <i class="fas fa-download mr-sm"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="visualization-container mt-lg" aria-describedby="visualization-description" role="region" aria-label="Mood and Sleep Data Visualization">
+                <div id="3d-graph" class="graph-container active" tabindex="0" aria-label="3D graph of mood and sleep data"></div>
+                <div id="2d-graph" class="graph-container" tabindex="0" aria-label="2D graph of mood and sleep data"></div>
+
+                <div class="graph-legend" aria-label="Mood scale legend">
+                    <div class="legend-title">Mood Scale</div>
+                    <div class="legend-gradient">
+                        <div class="gradient-bar" role="img" aria-label="Color gradient from red (sad) to blue (neutral) to green (happy)"></div>
+                        <div class="gradient-labels">
+                            <span>Sad</span>
+                            <span>Neutral</span>
+                            <span>Happy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="axis-labels" aria-hidden="true">
+                    <div class="x-axis-label">Days</div>
+                    <div class="y-axis-label">Sleep Hours</div>
+                    <div class="z-axis-label">Mood Rating</div>
+                </div>
+
+                <div class="visualization-tooltip" id="graph-tooltip" role="tooltip" aria-hidden="true">
+                    <div class="tooltip-date">January 15, 2025</div>
+                    <div class="tooltip-mood">Mood: <span>Happy (4)</span></div>
+                    <div class="tooltip-sleep">Sleep: <span>7.5 hours</span></div>
+                    <div class="tooltip-note">Note: <span>Had a productive day at work</span></div>
+                </div>
+
+                <!-- Loading indicator for progressive loading -->
+                <div class="loading-indicator" aria-live="polite" aria-hidden="true">
+                    <div class="loading-spinner" aria-hidden="true"></div>
+                    <div class="loading-text">Loading visualization...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-2 mt-xl">
+            <div class="card animate-fade-in-left">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Statistical Insights</h2>
+                        <p class="card-subtitle">Correlations and patterns in your data</p>
+                    </div>
+                    <div class="badge badge-neutral">
+                        <i class="fas fa-chart-line mr-sm"></i> Analysis
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon"><i class="fas fa-bed"></i></div>
+                                <div class="stat-title">Sleep-Mood Correlation</div>
+                            </div>
+                            <div class="stat-value" id="sleep-mood-correlation">0.72</div>
+                            <div class="stat-description">Strong positive correlation between sleep duration and mood rating</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon"><i class="fas fa-moon"></i></div>
+                                <div class="stat-title">Optimal Sleep</div>
+                            </div>
+                            <div class="stat-value" id="optimal-sleep">7.5 hours</div>
+                            <div class="stat-description">Sleep duration associated with your highest mood ratings</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
+                                <div class="stat-title">Best Day</div>
+                            </div>
+                            <div class="stat-value" id="best-day">Saturday</div>
+                            <div class="stat-description">Day of the week with your highest average mood</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="stat-title">Mood Trend</div>
+                            </div>
+                            <div class="stat-value" id="mood-trend">+12%</div>
+                            <div class="stat-description">Improvement in average mood over the past month</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card animate-fade-in-right">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Monthly Comparison</h2>
+                        <p class="card-subtitle">Compare patterns across different months</p>
+                    </div>
+                    <div class="month-selector">
+                        <button class="btn btn-icon btn-sm" id="prev-month-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span id="comparison-month">January vs. December</span>
+                        <button class="btn btn-icon btn-sm" id="next-month-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="comparison-chart-container">
+                        <canvas id="comparison-chart"></canvas>
+                    </div>
+                    <div class="comparison-insights mt-md">
+                        <div class="insight-item">
+                            <div class="insight-icon"><i class="fas fa-arrow-up"></i></div>
+                            <div class="insight-text">Average mood increased by <strong>0.8 points</strong> compared to last month</div>
+                        </div>
+                        <div class="insight-item">
+                            <div class="insight-icon"><i class="fas fa-bed"></i></div>
+                            <div class="insight-text">Sleep duration increased by <strong>0.5 hours</strong> on average</div>
+                        </div>
+                        <div class="insight-item">
+                            <div class="insight-icon"><i class="fas fa-calendar-check"></i></div>
+                            <div class="insight-text"><strong>25% more</strong> days with positive mood ratings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Export Options Modal -->
+    <div class="modal" id="export-modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal>&times;</button>
+            <div class="modal-header">
+                <h3 class="modal-title">Export Visualization</h3>
+            </div>
+            <div class="modal-body">
+                <div class="export-options">
+                    <button class="btn btn-secondary export-option" data-format="png">
+                        <i class="fas fa-file-image mr-sm"></i> PNG Image
+                    </button>
+                    <button class="btn btn-secondary export-option" data-format="pdf">
+                        <i class="fas fa-file-pdf mr-sm"></i> PDF Document
+                    </button>
+                    <button class="btn btn-secondary export-option" data-format="csv">
+                        <i class="fas fa-file-csv mr-sm"></i> CSV Data
+                    </button>
+                    <button class="btn btn-secondary export-option" data-format="json">
+                        <i class="fas fa-file-code mr-sm"></i> JSON Data
+                    </button>
+                </div>
+                <div class="export-preview mt-lg">
+                    <div class="preview-title">Preview</div>
+                    <div class="preview-container" id="export-preview">
+                        <div class="preview-placeholder">
+                            <i class="fas fa-image"></i>
+                            <span>Select an export format to preview</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close-modal>Cancel</button>
+                <button class="btn btn-primary" id="download-btn">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Mood Tracker</h3>
+                    <p class="text-medium">Track your emotions and discover patterns in your mood to improve your mental well-being.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="index.html" class="footer-link">Dashboard</a>
+                        <a href="calendar-view.html" class="footer-link">Calendar</a>
+                        <a href="statistics.html" class="footer-link">Statistics</a>
+                        <a href="#" class="footer-link">Settings</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Resources</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Help Center</a>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                        <a href="#" class="footer-link">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 Mood Tracker. All rights reserved.
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="js/shared.js"></script>
+    <script src="js/statistics-data.js"></script>
+    <script src="js/statistics-3d-enhanced.js"></script>
+    <script src="js/statistics-2d.js"></script>
+    <script src="js/statistics-export.js"></script>
+
+    <!-- Keyboard Controls Indicator -->
+    <div class="keyboard-controls-indicator">
+        <div class="keyboard-controls-title">Keyboard Controls</div>
+        <div class="keyboard-controls-list">
+            <div>Rotate:</div><div><span class="key">←</span> <span class="key">→</span> <span class="key">↑</span> <span class="key">↓</span></div>
+            <div>Move:</div><div><span class="key">W</span> <span class="key">A</span> <span class="key">S</span> <span class="key">D</span></div>
+            <div>Zoom:</div><div><span class="key">Q</span> <span class="key">E</span></div>
+            <div>Exit Focus:</div><div><span class="key">Esc</span></div>
+        </div>
+    </div>
+
+    <!-- Screen reader descriptions for accessibility -->
+    <div class="sr-only" id="visualization-description">
+        3D visualization of mood and sleep data. The X-axis represents days of the month,
+        the Y-axis represents sleep hours from 0 to 12, and the Z-axis represents mood rating from 1 to 5.
+        Each data point is color-coded based on mood, with red representing negative moods,
+        blue representing neutral moods, and green representing positive moods.
+    </div>
+</body>
+</html>
